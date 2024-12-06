@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Interface</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .block {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+        }
+        .transaction {
+            margin: 5px 0;
+            padding: 5px;
+            background: #f6f8fa;
+            border-radius: 4px;
+        }
+        .balance {
+            font-size: 24px;
+            color: #28a745;
+            margin: 10px 0;
+        }
+        button {
+            background: #0366d6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0255b3;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Blockchain Interface</h1>
+    
+    <div class="container">
+        <h2>Wallet</h2>
+        <p>Address: {{ address }}</p>
+        <div class="balance">Balance: {{ balance }} coins</div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Transactions</h3>
+                <p>{{ total_transactions }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Blocks Mined</h3>
+                <p>{{ blocks_mined }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Mining Rewards</h3>
+                <p>{{ mining_rewards }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <h2>New Transaction</h2>
+    <form action="/transaction" method="POST">
+        <p>
+            <label>Recipient:</label><br>
+            <input type="text" name="recipient" required>
+        </p>
+        <p>
+            <label>Amount:</label><br>
+            <input type="number" name="amount" step="0.01" required>
+        </p>
+        <button type="submit">Send</button>
+    </form>
+    
+    <h2>Mining</h2>
+    <form action="/mine" method="POST">
+        <button type="submit">Mine New Block</button>
+    </form>
+    
+    <h2>Pending Transactions</h2>
+    {% for tx in pending %}
+    <div class="transaction">
+        <p>From: {{ tx.sender }}</p>
+        <p>To: {{ tx.recipient }}</p>
+        <p>Amount: {{ tx.amount }}</p>
+    </div>
+    {% endfor %}
+    
+    <h2>Blockchain</h2>
+    {% for block in chain %}
+    <div class="block">
+        <h3>Block #{{ block.index }}</h3>
+        <p>Timestamp: {{ block.timestamp }}</p>
+        <p>Proof: {{ block.proof }}</p>
+        <p>Previous Hash: {{ block.previous_hash }}</p>
+        <h4>Transactions:</h4>
+        {% for tx in block.transactions %}
+        <div class="transaction">
+            <p>From: {{ tx.sender }}</p>
+            <p>To: {{ tx.recipient }}</p>
+            <p>Amount: {{ tx.amount }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</body>
+</html> 

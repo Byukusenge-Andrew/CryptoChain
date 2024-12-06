@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+migrations/versions/*
+!migrations/versions/__init__.py
+
+# Wallets & Keys
+wallets/
+invalid_wallets/
+*.pem
+*.pen
+*.key
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+temp/
+tmp/
+
+# Configuration
+config.ini
+database.ini
+alembic.ini
+
+# Local development
+local_settings.py
+instance/
+
+# Test coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Blockchain specific
+node_data/
+blockchain_data/
